@@ -1,5 +1,22 @@
-<!-- <link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/signin.css"> -->
+<?php
+include "../header.php";
+
+    $db = new PDO($dsn, $user, $pwd);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    
+if($_POST){
+    if ($_POST['email'] and $_POST['password']) {
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    // print("insert into users ('email', 'password') values ('" .$email. "','" .$password."'); ");
+    $sth = $db->exec("insert into users (email, password) values ('" .$email. "','" .$password."'); ");
+    }
+}
+
+?>
+
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/signin.css">
 <main class="form-signin">
   <form method="POST" action="?">
     <img class="mb-4" src="../img/ndlp.png" alt="" width="72" height="57">
@@ -11,18 +28,13 @@
     </div>
 <br>
     <div class="form-floating">
-      <input name="password1" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
-    </div>
-<br>
-    <div class="form-floating">
-      <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Confirm password">
-      <label for="floatingPassword">Confirm password</label>
     </div>
 <br>
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="user"> User 
+        <input type="checkbox" value="user"> User
         <br>
         <input type="checkbox" value="superuser"> Super user
       </label>
