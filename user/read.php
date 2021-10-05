@@ -1,5 +1,5 @@
 <?php
-include "../header.php";
+include_once "../header.php";
 
 try {
     $db = new PDO($dsn, $user, $pwd);

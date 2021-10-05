@@ -1,5 +1,5 @@
-<?php include "conf.php"; ?>
-<?php
+ <?php
+include_once "header.php";
 
 class User{
 
@@ -16,7 +16,7 @@ class User{
     public function hydrate(array $ligne)
     {
         foreach($ligne as $key => $value){
-            $method = 'set_'($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value); // on appel une methode qui est dans la variable donc on ajoute un $
             }
